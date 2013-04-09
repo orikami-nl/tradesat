@@ -3,6 +3,9 @@ if Meteor.isClient
 
   Meteor.startup ->
 
+    w = 960
+    h = 540
+
     colors = 
     [
       d3.rgb(247,251,255).toString(),
@@ -16,64 +19,52 @@ if Meteor.isClient
       d3.rgb(8,48,107).toString()
     ]
 
-    svg = d3.select("body").append("svg")
-    .attr("class", "chart")
-    .attr("width", 1000)
-    .attr("height", 800);
-
-    svg.selectAll("path")
-      .data(geoData.features)
-      .enter().append("path")
-      .attr("class", "country")
-      .attr("id", (d) -> d.properties.iso_a3)
-      .attr("d", d3.geo.path().projection(d3.geo.mercator().scale(5000).translate([300,1300])))
-      .style("fill", (d) -> colors[d.properties.mapcolor9-1])
-      .on "mouseover", (d, i) ->
-        d3.select(this).style('fill', 'red')
-      .on "mouseout", (d, i) ->
-        d3.select(this).style('fill', (d) -> colors[d.properties.mapcolor9-1])
+    @tooltip = d3.select("body").append("div")   
+      .attr("class", "tooltip")
+      .style("opacity", 0);
 
     @line = d3.svg.line()
       .interpolate("cardinal")
       .x( (d) -> d.x )
       .y( (d) -> d.y )
-
-    @linevar = d3.svg.line.variable()
-      .interpolate("basis")
-      .w( (d) -> d.w )
-      .x( (d) -> d.x )
-      .y( (d) -> d.y )
-
-
+      
     @nl_coords = ->
       nl = _.find(geoData.features, (country) -> country.properties.iso_a3 == "NLD" )
-      {x: d3.geo.path().projection(d3.geo.mercator().scale(5000).translate([300,1300])).centroid(nl)[0], y: d3.geo.path().projection(d3.geo.mercator().scale(5000).translate([300,1300])).centroid(nl)[1], w: 1}
+      {x: d3.geo.path().projection(projection).centroid(nl)[0], y: d3.geo.path().projection(projection).centroid(nl)[1], w: 1}
 
-    svg.selectAll("g")
+    projection = d3.geo.mercator()
+      .scale((w + 1) / 2 / Math.PI * 3.8)
+      .translate([w / 3, h * 1.73])
+      .precision(.1)
+
+
+    svg = d3.select("body").append("svg")
+    .attr("class", "chart")
+    .attr("width", w)
+    .attr("height", h)
+
+    svg.selectAll("path")
       .data(geoData.features)
-      .enter().append("path")
-      .attr("d", (d) -> 
-        x = d3.geo.path().projection(d3.geo.mercator().scale(5000).translate([300,1300])).centroid(d)[0]
-        y = d3.geo.path().projection(d3.geo.mercator().scale(5000).translate([300,1300])).centroid(d)[1]
-        linevar.tension(0.5)([
-          nl_coords(),
-          # {
-          #   x: (x - nl_coords().x) / 2 + nl_coords().x, 
-          #   y: (x - nl_coords().y) / 2 + nl_coords().y
-          # }
-          {
-            x: x 
-            y: y
-            w: Math.random()*10
-          }
-        ]))
-      .style("stroke", "red")
-      .style("fill", "red")
-      # .style("display", "none")
-        # svg.select('circle#point-'+i)
-        #   .style('fill', d3.rgb(31, 120, 180))
+      .enter().append("path") 
+      .attr("class", "country")
+      .attr("id", (d) -> d.properties.iso_a3)
+      .attr("d", d3.geo.path().projection(projection))
+      .style("fill", (d) -> colors[d.properties.mapcolor9-1])
+      .on "mouseover", (d, i) ->
+        d3.select(this).transition().duration(300).style('fill', 'red')
+        tooltip.transition()        
+          .duration(300)      
+          .style("opacity", .9);     
+        tooltip.html("TOOLTIP")  
+          .style("left", (d3.geo.path().projection(projection).centroid(d)[0])-28 + "px")     
+          .style("top", (d3.geo.path().projection(projection).centroid(d)[1]) + "px")
+      .on "mouseout", (d, i) ->
+        d3.select(this).transition().duration(300).style('fill', (d) -> colors[d.properties.mapcolor9-1])
+        tooltip.transition()        
+          .duration(300)      
+          .style("opacity", 0)
 
-      # .style("stroke-width", (d) -> Math.random()*10)
+
 
 
 if Meteor.isServer

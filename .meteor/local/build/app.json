@@ -1,0 +1,503 @@
+{
+  "load": [
+    "app/packages/underscore/underscore.js",
+    "app/packages/meteor/server_environment.js",
+    "app/packages/meteor/helpers.js",
+    "app/packages/meteor/timers.js",
+    "app/packages/meteor/fiber_helpers.js",
+    "app/packages/meteor/dynamics_nodejs.js",
+    "app/packages/meteor/url_server.js",
+    "app/packages/meteor/url_common.js",
+    "app/packages/deps/deps.js",
+    "app/packages/logging/logging.js",
+    "app/packages/random/random.js",
+    "app/packages/json/json2.js",
+    "app/packages/routepolicy/routepolicy.js",
+    "app/packages/stream/stream_server.js",
+    "app/packages/ejson/ejson.js",
+    "app/packages/ejson/base64.js",
+    "app/packages/ordered-dict/ordered_dict.js",
+    "app/packages/minimongo/minimongo.js",
+    "app/packages/minimongo/selector.js",
+    "app/packages/minimongo/modify.js",
+    "app/packages/minimongo/diff.js",
+    "app/packages/minimongo/objectid.js",
+    "app/packages/livedata/writefence.js",
+    "app/packages/livedata/crossbar.js",
+    "app/packages/livedata/livedata_common.js",
+    "app/packages/livedata/livedata_server.js",
+    "app/packages/livedata/server_convenience.js",
+    "app/packages/mongo-livedata/mongo_driver.js",
+    "app/packages/mongo-livedata/local_collection_driver.js",
+    "app/packages/mongo-livedata/remote_collection_driver.js",
+    "app/packages/mongo-livedata/collection.js",
+    "app/packages/startup/startup_server.js",
+    "app/packages/handlebars/parse.js",
+    "app/packages/past/past.js",
+    "app/packages/autopublish/autopublish.js",
+    "app/packages/insecure/insecure.js",
+    "app/lib/d3.v3.min.js",
+    "app/lib/data.js",
+    "app/lib/geo_data.js",
+    "app/lib/line-variable.js",
+    "app/tradesat.coffee.js"
+  ],
+  "manifest": [
+    {
+      "path": "static_cacheable/packages/underscore/underscore.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/packages/underscore/underscore.js?867d3653d53e9c7a171483edbcad9670e12288c7",
+      "size": 40986,
+      "hash": "867d3653d53e9c7a171483edbcad9670e12288c7"
+    },
+    {
+      "path": "static_cacheable/packages/meteor/client_environment.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/packages/meteor/client_environment.js?e7aa12536dfb9660ccaa97b50b716886b381e50f",
+      "size": 286,
+      "hash": "e7aa12536dfb9660ccaa97b50b716886b381e50f"
+    },
+    {
+      "path": "static_cacheable/packages/meteor/helpers.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/packages/meteor/helpers.js?0b72af700495c54228b27df83ea6fb72e83bf89c",
+      "size": 1585,
+      "hash": "0b72af700495c54228b27df83ea6fb72e83bf89c"
+    },
+    {
+      "path": "static_cacheable/packages/meteor/timers.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/packages/meteor/timers.js?3af341ef9170184521b9d206d4a77cc16c2f8f79",
+      "size": 2095,
+      "hash": "3af341ef9170184521b9d206d4a77cc16c2f8f79"
+    },
+    {
+      "path": "static_cacheable/packages/meteor/dynamics_browser.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/packages/meteor/dynamics_browser.js?704b744e044302080d297d9bc5eb19b2f11944a4",
+      "size": 1180,
+      "hash": "704b744e044302080d297d9bc5eb19b2f11944a4"
+    },
+    {
+      "path": "static_cacheable/packages/meteor/url_common.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/packages/meteor/url_common.js?82340f22c5cb2f31afcbde98962f045e6d12511b",
+      "size": 1238,
+      "hash": "82340f22c5cb2f31afcbde98962f045e6d12511b"
+    },
+    {
+      "path": "static_cacheable/packages/deps/deps.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/packages/deps/deps.js?9642a93ae1f8ffa8eb1c2475b198c764f183d693",
+      "size": 8233,
+      "hash": "9642a93ae1f8ffa8eb1c2475b198c764f183d693"
+    },
+    {
+      "path": "static_cacheable/packages/reactive-dict/reactive-dict.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/packages/reactive-dict/reactive-dict.js?10a729ae99b6e6ffabea589ca33783c9a54606aa",
+      "size": 3936,
+      "hash": "10a729ae99b6e6ffabea589ca33783c9a54606aa"
+    },
+    {
+      "path": "static_cacheable/packages/logging/logging.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/packages/logging/logging.js?99feefe860e619952d990cbb5584cd81db3f6878",
+      "size": 2415,
+      "hash": "99feefe860e619952d990cbb5584cd81db3f6878"
+    },
+    {
+      "path": "static_cacheable/packages/json/json2.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/packages/json/json2.js?9496f1a3b97d5d64092952dd843a520a1db435be",
+      "size": 17550,
+      "hash": "9496f1a3b97d5d64092952dd843a520a1db435be"
+    },
+    {
+      "path": "static_cacheable/packages/reload/reload.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/packages/reload/reload.js?565e15a7d5558967a9b364de6da6bd569f9da18c",
+      "size": 5514,
+      "hash": "565e15a7d5558967a9b364de6da6bd569f9da18c"
+    },
+    {
+      "path": "static_cacheable/packages/session/session.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/packages/session/session.js?6687b44955d0a17353479e0d0c787e378d146e38",
+      "size": 384,
+      "hash": "6687b44955d0a17353479e0d0c787e378d146e38"
+    },
+    {
+      "path": "static_cacheable/packages/random/random.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/packages/random/random.js?af323e9154cf5e95ca7ee0916744fb0410060aed",
+      "size": 3711,
+      "hash": "af323e9154cf5e95ca7ee0916744fb0410060aed"
+    },
+    {
+      "path": "static_cacheable/packages/stream/sockjs-0.3.4.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/packages/stream/sockjs-0.3.4.js?1c06406399cf3d8a35e0a24f972d207a39edb972",
+      "size": 78264,
+      "hash": "1c06406399cf3d8a35e0a24f972d207a39edb972"
+    },
+    {
+      "path": "static_cacheable/packages/stream/stream_client.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/packages/stream/stream_client.js?19a52ae1bbb3b44cdc3e3946f8a17d30218f0707",
+      "size": 12423,
+      "hash": "19a52ae1bbb3b44cdc3e3946f8a17d30218f0707"
+    },
+    {
+      "path": "static_cacheable/packages/ejson/ejson.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/packages/ejson/ejson.js?93b69b826613360984e024d6e90a6d293222492e",
+      "size": 8917,
+      "hash": "93b69b826613360984e024d6e90a6d293222492e"
+    },
+    {
+      "path": "static_cacheable/packages/ejson/base64.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/packages/ejson/base64.js?d9d6f3d3dc361fae0a7301b59de2a382e42ad46c",
+      "size": 2569,
+      "hash": "d9d6f3d3dc361fae0a7301b59de2a382e42ad46c"
+    },
+    {
+      "path": "static_cacheable/packages/ordered-dict/ordered_dict.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/packages/ordered-dict/ordered_dict.js?a802ca250c1c64e4b09965bd120f21667da73d80",
+      "size": 5504,
+      "hash": "a802ca250c1c64e4b09965bd120f21667da73d80"
+    },
+    {
+      "path": "static_cacheable/packages/minimongo/minimongo.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/packages/minimongo/minimongo.js?1fda5f1dddc156096c403531ab960233015e95b8",
+      "size": 30835,
+      "hash": "1fda5f1dddc156096c403531ab960233015e95b8"
+    },
+    {
+      "path": "static_cacheable/packages/minimongo/selector.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/packages/minimongo/selector.js?403f1dbe9fe52b45e6437837edd71448d9d3d68d",
+      "size": 21503,
+      "hash": "403f1dbe9fe52b45e6437837edd71448d9d3d68d"
+    },
+    {
+      "path": "static_cacheable/packages/minimongo/modify.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/packages/minimongo/modify.js?64c32c32994713e28c3912ad5105f4bf0bfe8293",
+      "size": 9907,
+      "hash": "64c32c32994713e28c3912ad5105f4bf0bfe8293"
+    },
+    {
+      "path": "static_cacheable/packages/minimongo/diff.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/packages/minimongo/diff.js?916e9eac306e62a9adc545e379dc1a1f71d0c169",
+      "size": 7508,
+      "hash": "916e9eac306e62a9adc545e379dc1a1f71d0c169"
+    },
+    {
+      "path": "static_cacheable/packages/minimongo/objectid.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/packages/minimongo/objectid.js?1642ccd42291734e736361bee72eb4b8bbf1101c",
+      "size": 3626,
+      "hash": "1642ccd42291734e736361bee72eb4b8bbf1101c"
+    },
+    {
+      "path": "static_cacheable/packages/livedata/livedata_common.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/packages/livedata/livedata_common.js?49a549326f59a278075c74dc291064456b9dd95a",
+      "size": 4818,
+      "hash": "49a549326f59a278075c74dc291064456b9dd95a"
+    },
+    {
+      "path": "static_cacheable/packages/livedata/livedata_connection.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/packages/livedata/livedata_connection.js?ec7584d6d02776c2a61610e34918a2f2a847196d",
+      "size": 49998,
+      "hash": "ec7584d6d02776c2a61610e34918a2f2a847196d"
+    },
+    {
+      "path": "static_cacheable/packages/livedata/client_convenience.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/packages/livedata/client_convenience.js?db66dcb3558f90258f4ea5271aab83a60a75ef9c",
+      "size": 788,
+      "hash": "db66dcb3558f90258f4ea5271aab83a60a75ef9c"
+    },
+    {
+      "path": "static_cacheable/packages/mongo-livedata/local_collection_driver.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/packages/mongo-livedata/local_collection_driver.js?511d0c38be7de7a08e00b68d2632a9c7fa3d16a1",
+      "size": 494,
+      "hash": "511d0c38be7de7a08e00b68d2632a9c7fa3d16a1"
+    },
+    {
+      "path": "static_cacheable/packages/mongo-livedata/collection.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/packages/mongo-livedata/collection.js?6527df3c6b6e8974b203f749c4744693c61c4ec1",
+      "size": 25793,
+      "hash": "6527df3c6b6e8974b203f749c4744693c61c4ec1"
+    },
+    {
+      "path": "static_cacheable/packages/jquery/jquery.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/packages/jquery/jquery.js?87d78122f275866c2fe8606ae7ed7cc94da3849c",
+      "size": 266902,
+      "hash": "87d78122f275866c2fe8606ae7ed7cc94da3849c"
+    },
+    {
+      "path": "static_cacheable/packages/domutils/domutils.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/packages/domutils/domutils.js?6571a9397ddbdb9e469dacec05776cb1d00a826b",
+      "size": 20678,
+      "hash": "6571a9397ddbdb9e469dacec05776cb1d00a826b"
+    },
+    {
+      "path": "static_cacheable/packages/liverange/liverange.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/packages/liverange/liverange.js?31c1f5eb15cbaa59c35a1a90a6506e7ef5c8f835",
+      "size": 24056,
+      "hash": "31c1f5eb15cbaa59c35a1a90a6506e7ef5c8f835"
+    },
+    {
+      "path": "static_cacheable/packages/universal-events/listener.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/packages/universal-events/listener.js?53a523bd0e7cb49033cac8aa0c2067627d8adae9",
+      "size": 9455,
+      "hash": "53a523bd0e7cb49033cac8aa0c2067627d8adae9"
+    },
+    {
+      "path": "static_cacheable/packages/universal-events/events-w3c.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/packages/universal-events/events-w3c.js?0005ad628ea7dc66cfe175333bce870656e7395a",
+      "size": 7154,
+      "hash": "0005ad628ea7dc66cfe175333bce870656e7395a"
+    },
+    {
+      "path": "static_cacheable/packages/universal-events/events-ie.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/packages/universal-events/events-ie.js?033564e08bf8a343004f9ff6661827f91fb65947",
+      "size": 5938,
+      "hash": "033564e08bf8a343004f9ff6661827f91fb65947"
+    },
+    {
+      "path": "static_cacheable/packages/spark/spark.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/packages/spark/spark.js?45c746f38023ceb80745f4b4280457e15f058bbc",
+      "size": 42421,
+      "hash": "45c746f38023ceb80745f4b4280457e15f058bbc"
+    },
+    {
+      "path": "static_cacheable/packages/spark/patch.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/packages/spark/patch.js?299cb25985c501315fbd758353d7f498697a39c3",
+      "size": 22559,
+      "hash": "299cb25985c501315fbd758353d7f498697a39c3"
+    },
+    {
+      "path": "static_cacheable/packages/spark/convenience.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/packages/spark/convenience.js?548a745957636ff1ee8a96c0e1ae825220785b8f",
+      "size": 679,
+      "hash": "548a745957636ff1ee8a96c0e1ae825220785b8f"
+    },
+    {
+      "path": "static_cacheable/packages/spark/utils.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/packages/spark/utils.js?18ac4340a062e874539a394a34c67f565be5a16c",
+      "size": 1140,
+      "hash": "18ac4340a062e874539a394a34c67f565be5a16c"
+    },
+    {
+      "path": "static_cacheable/packages/templating/deftemplate.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/packages/templating/deftemplate.js?b622653d121262e50a80be772bf5b1e55ab33881",
+      "size": 6723,
+      "hash": "b622653d121262e50a80be772bf5b1e55ab33881"
+    },
+    {
+      "path": "static_cacheable/packages/startup/startup_client.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/packages/startup/startup_client.js?c61e3fd8d87b168dd21d1b9fae53bc48074927f6",
+      "size": 902,
+      "hash": "c61e3fd8d87b168dd21d1b9fae53bc48074927f6"
+    },
+    {
+      "path": "static_cacheable/packages/handlebars/evaluate.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/packages/handlebars/evaluate.js?5f96328b2393e97e3f37d7fd00456ce6698fb895",
+      "size": 12947,
+      "hash": "5f96328b2393e97e3f37d7fd00456ce6698fb895"
+    },
+    {
+      "path": "static_cacheable/packages/past/past.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/packages/past/past.js?5cfdb9c5fd65a75ccb304ea2f56db38160bddf79",
+      "size": 1114,
+      "hash": "5cfdb9c5fd65a75ccb304ea2f56db38160bddf79"
+    },
+    {
+      "path": "static_cacheable/packages/preserve-inputs/preserve-inputs.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/packages/preserve-inputs/preserve-inputs.js?d3eb05209dd75bc691c9a5ab533a0f354b8e0415",
+      "size": 260,
+      "hash": "d3eb05209dd75bc691c9a5ab533a0f354b8e0415"
+    },
+    {
+      "path": "static_cacheable/template.tradesat.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/template.tradesat.js?ef8264aff5d337742a550a48bebcb48c8e92e808",
+      "size": 149,
+      "hash": "ef8264aff5d337742a550a48bebcb48c8e92e808"
+    },
+    {
+      "path": "static_cacheable/lib/d3.v3.min.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/lib/d3.v3.min.js?1f92baa3cc3c43a6134f3300a291f3824053c369",
+      "size": 137403,
+      "hash": "1f92baa3cc3c43a6134f3300a291f3824053c369"
+    },
+    {
+      "path": "static_cacheable/lib/data.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/lib/data.js?ae776f08ac8f11291808060c4faeaa69d8440713",
+      "size": 152849,
+      "hash": "ae776f08ac8f11291808060c4faeaa69d8440713"
+    },
+    {
+      "path": "static_cacheable/lib/geo_data.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/lib/geo_data.js?537639a1015611048bd262dd340673adf8575a2f",
+      "size": 589091,
+      "hash": "537639a1015611048bd262dd340673adf8575a2f"
+    },
+    {
+      "path": "static_cacheable/lib/line-variable.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/lib/line-variable.js?2c3ddb3b662efc11e82bfe0eae6fba652ba90b87",
+      "size": 3600,
+      "hash": "2c3ddb3b662efc11e82bfe0eae6fba652ba90b87"
+    },
+    {
+      "path": "static_cacheable/tradesat.coffee.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/tradesat.coffee.js?c2d283c18995c0c9546a6f8c98c74f69cd91dd8f",
+      "size": 2308,
+      "hash": "c2d283c18995c0c9546a6f8c98c74f69cd91dd8f"
+    },
+    {
+      "path": "static_cacheable/tradesat.less.css",
+      "where": "client",
+      "type": "css",
+      "cacheable": true,
+      "url": "/tradesat.less.css?8f076e10e446e60761ed8ff40e84b387809b46c6",
+      "size": 271,
+      "hash": "8f076e10e446e60761ed8ff40e84b387809b46c6"
+    },
+    {
+      "path": "app.html",
+      "where": "internal",
+      "hash": "5d637c021a32510498a9c15a69b817347fcd2b5f"
+    }
+  ],
+  "release": "0.6.1"
+}
