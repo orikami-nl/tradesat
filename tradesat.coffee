@@ -28,15 +28,26 @@ if Meteor.isClient
       .attr("id", (d) -> d.properties.iso_a3)
       .attr("d", d3.geo.path().projection(d3.geo.mercator().scale(5000).translate([300,1300])))
       .style("fill", (d) -> colors[d.properties.mapcolor9-1])
+      .on "mouseover", (d, i) ->
+        d3.select(this).style('fill', 'red')
+      .on "mouseout", (d, i) ->
+        d3.select(this).style('fill', (d) -> colors[d.properties.mapcolor9-1])
 
     @line = d3.svg.line()
       .interpolate("cardinal")
       .x( (d) -> d.x )
       .y( (d) -> d.y )
 
+    @linevar = d3.svg.line.variable()
+      .interpolate("basis")
+      .w( (d) -> d.w )
+      .x( (d) -> d.x )
+      .y( (d) -> d.y )
+
+
     @nl_coords = ->
       nl = _.find(geoData.features, (country) -> country.properties.iso_a3 == "NLD" )
-      {x: d3.geo.path().projection(d3.geo.mercator().scale(5000).translate([300,1300])).centroid(nl)[0], y: d3.geo.path().projection(d3.geo.mercator().scale(5000).translate([300,1300])).centroid(nl)[1]}
+      {x: d3.geo.path().projection(d3.geo.mercator().scale(5000).translate([300,1300])).centroid(nl)[0], y: d3.geo.path().projection(d3.geo.mercator().scale(5000).translate([300,1300])).centroid(nl)[1], w: 1}
 
     svg.selectAll("g")
       .data(geoData.features)
@@ -44,24 +55,26 @@ if Meteor.isClient
       .attr("d", (d) -> 
         x = d3.geo.path().projection(d3.geo.mercator().scale(5000).translate([300,1300])).centroid(d)[0]
         y = d3.geo.path().projection(d3.geo.mercator().scale(5000).translate([300,1300])).centroid(d)[1]
-        line.tension(0.5)([
+        linevar.tension(0.5)([
           nl_coords(),
           # {
           #   x: (x - nl_coords().x) / 2 + nl_coords().x, 
           #   y: (x - nl_coords().y) / 2 + nl_coords().y
           # }
           {
-            x: x, 
+            x: x 
             y: y
+            w: Math.random()*10
           }
         ]))
       .style("stroke", "red")
-      .style("fill", "transparent")
+      .style("fill", "red")
+      # .style("display", "none")
+        # svg.select('circle#point-'+i)
+        #   .style('fill', d3.rgb(31, 120, 180))
 
+      # .style("stroke-width", (d) -> Math.random()*10)
 
-
-
-# <path d="M-124.8182373046875,772.93191528320tqc31L375.02515860833284,447.02153192674" style="stroke: #ff0000; fill: rgba(0, 0, 0, 0);"></path>
 
 if Meteor.isServer
   Meteor.startup ->
