@@ -36,10 +36,8 @@
     "app/packages/past/past.js",
     "app/packages/autopublish/autopublish.js",
     "app/packages/insecure/insecure.js",
-    "app/lib/d3.v3.min.js",
     "app/lib/data.js",
     "app/lib/geo_data.js",
-    "app/lib/line-variable.js",
     "app/tradesat.coffee.js"
   ],
   "manifest": [
@@ -440,49 +438,31 @@
       "hash": "ef8264aff5d337742a550a48bebcb48c8e92e808"
     },
     {
-      "path": "static_cacheable/lib/d3.v3.min.js",
-      "where": "client",
-      "type": "js",
-      "cacheable": true,
-      "url": "/lib/d3.v3.min.js?1f92baa3cc3c43a6134f3300a291f3824053c369",
-      "size": 137403,
-      "hash": "1f92baa3cc3c43a6134f3300a291f3824053c369"
-    },
-    {
       "path": "static_cacheable/lib/data.js",
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/lib/data.js?ae776f08ac8f11291808060c4faeaa69d8440713",
-      "size": 152849,
-      "hash": "ae776f08ac8f11291808060c4faeaa69d8440713"
+      "url": "/lib/data.js?973cf39ca566d83375b4f065081633cfb84021d8",
+      "size": 3654,
+      "hash": "973cf39ca566d83375b4f065081633cfb84021d8"
     },
     {
       "path": "static_cacheable/lib/geo_data.js",
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/lib/geo_data.js?537639a1015611048bd262dd340673adf8575a2f",
-      "size": 589091,
-      "hash": "537639a1015611048bd262dd340673adf8575a2f"
-    },
-    {
-      "path": "static_cacheable/lib/line-variable.js",
-      "where": "client",
-      "type": "js",
-      "cacheable": true,
-      "url": "/lib/line-variable.js?2c3ddb3b662efc11e82bfe0eae6fba652ba90b87",
-      "size": 3600,
-      "hash": "2c3ddb3b662efc11e82bfe0eae6fba652ba90b87"
+      "url": "/lib/geo_data.js?ec87d49b910401de812807a131526291dfafb282",
+      "size": 588986,
+      "hash": "ec87d49b910401de812807a131526291dfafb282"
     },
     {
       "path": "static_cacheable/tradesat.coffee.js",
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/tradesat.coffee.js?c2d283c18995c0c9546a6f8c98c74f69cd91dd8f",
-      "size": 2308,
-      "hash": "c2d283c18995c0c9546a6f8c98c74f69cd91dd8f"
+      "url": "/tradesat.coffee.js?828d6a8fa2efdbbff872a785289226f39321e772",
+      "size": 2225,
+      "hash": "828d6a8fa2efdbbff872a785289226f39321e772"
     },
     {
       "path": "static_cacheable/tradesat.less.css",
@@ -496,7 +476,7 @@
     {
       "path": "app.html",
       "where": "internal",
-      "hash": "5d637c021a32510498a9c15a69b817347fcd2b5f"
+      "hash": "81c72070e77f2e7a9732de056cc24257eb5b4998"
     }
   ],
   "release": "0.6.1"
