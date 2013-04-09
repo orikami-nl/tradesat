@@ -35,8 +35,8 @@ if Meteor.isClient
       .y( (d) -> d.y )
 
     @nl_coords = ->
-      bbox = d3.select("#NLD").node().getBBox()
-      {x: bbox.x + bbox.width/2, y: bbox.y + bbox.height/2}
+      nl = _.find(geoData.features, (country) -> country.properties.iso_a3 == "NLD" )
+      {x: d3.geo.path().projection(d3.geo.mercator().scale(5000).translate([300,1300])).centroid(nl)[0], y: d3.geo.path().projection(d3.geo.mercator().scale(5000).translate([300,1300])).centroid(nl)[1]}
 
     svg.selectAll("g")
       .data(geoData.features)
