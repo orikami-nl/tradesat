@@ -48,11 +48,13 @@ if Meteor.isClient
 
     projection = d3.geo.mercator()
       .scale((w + 1) / 2 / Math.PI * 3.8)
-      .translate([w / 3, h * 1.73])
+      .translate([w / 3, h * 1.70])
       .precision(.1)
 
+    logscale = d3.scale.log().domain([10,5000000])
+
     @tradecolor = (data, date) ->
-      ramp = d3.scale.log().domain([10,5000000]).range(["white","#08306b"]);
+      ramp = logscale.range(["white","#08306b"]);
       if data
         if xport == "export"
           ramp(data.export[date])
@@ -158,6 +160,33 @@ if Meteor.isClient
         redraw()
         $("button").removeClass("active")
         $(this).addClass("active")
+
+    gradient = svg.append("svg:defs").append("linearGradient").attr("id","gradient")
+      .attr("x1", "0%").attr("y1", "0%").attr("x2","0%").attr("y2","100%")
+    gradient.append("stop").attr("offset", "0%").attr("stop-color", "#08306b")
+    gradient.append("stop").attr("offset", "100%").attr("stop-color", "white")
+
+    @legend = svg.append("svg:rect").attr("id","legend")
+      .attr("fill","url(#gradient)")
+      .attr("x",15).attr("y",250)
+      .attr("width",20).attr("height",200)
+
+    legend_ticks = ["€0","€50.000","€500.000","€5 miljoen","€50 miljoen","€500 miljoen","5+ miljard"]
+
+    d3.select(".chart-container").selectAll(".legend-label")
+      .data(legend_ticks)
+      .enter().append("div")
+      .attr("class","legend-label")
+      .style("top", (d,i) -> "#{450 - 200/6 * i - 20}px")
+      .append("h5").html((d) -> d)
+
+    svg.selectAll(".legend-tick")
+      .data(legend_ticks)
+      .enter().append("svg:line")
+        .attr("class","legend-tick")
+        .attr("x1",35).attr("y1", (d,i) -> 450 - 200/6 * i )
+        .attr("x2",40).attr("y2", (d,i) -> 450 - 200/6 * i )
+
 
     redraw = (value) =>
       if value
