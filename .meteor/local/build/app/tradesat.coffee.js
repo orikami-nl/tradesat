@@ -1,11 +1,21 @@
 
 if (Meteor.isClient) {
   Meteor.startup(function() {
-    var colors, h, projection, redraw, svg, t, w, xport, xport_toggle_div,
+    var colors, h, month_names, projection, redraw, svg, t, w, xport, xport_toggle_div,
       _this = this;
     w = 960;
     h = 540;
     colors = [d3.rgb(247, 251, 255).toString(), d3.rgb(222, 235, 247).toString(), d3.rgb(198, 219, 239).toString(), d3.rgb(158, 202, 225).toString(), d3.rgb(107, 174, 214).toString(), d3.rgb(66, 146, 198).toString(), d3.rgb(33, 113, 181).toString(), d3.rgb(8, 81, 156).toString(), d3.rgb(8, 48, 107).toString()];
+    month_names = ["Januari", "Februari", "Maart", "April", "Mei", "Juni", "Juli", "Augustus", "September", "Oktober", "November", "December"];
+    accounting.settings = _.defaults({
+      currency: {
+        symbol: "€",
+        format: "%s%v",
+        decimal: ",",
+        thousand: ".",
+        precision: 0
+      }
+    }, accounting.settings);
     t = 2;
     xport = "import";
     this.tooltip = d3.select("body").append("div").attr("class", "tooltip").style("opacity", 0);
@@ -28,7 +38,7 @@ if (Meteor.isClient) {
     projection = d3.geo.mercator().scale((w + 1) / 2 / Math.PI * 3.8).translate([w / 3, h * 1.73]).precision(.1);
     this.tradecolor = function(data, date) {
       var ramp;
-      ramp = d3.scale.log().domain([100, 1000000]).range(["white", "blue"]);
+      ramp = d3.scale.log().domain([10, 10000000]).range(["white", "blue"]);
       if (data) {
         if (xport === "export") {
           return ramp(data["export"][date]);
@@ -39,9 +49,19 @@ if (Meteor.isClient) {
         return "#aaaaaa";
       }
     };
+    this.cash = function(data) {
+      var export_cash, import_cash;
+      if (data) {
+        export_cash = data["export"]["2012-" + t] * 1000;
+        import_cash = data["import"]["2012-" + t] * 1000;
+        return "<h5>          Export: " + (accounting.formatMoney(export_cash)) + "        </h5>        <h5>          Import: " + (accounting.formatMoney(import_cash)) + "        </h5>";
+      } else {
+        return "";
+      }
+    };
     svg = d3.select(".span12").append("div").attr("class", "chart-container").append("svg").attr("class", "chart").attr("width", w).attr("height", h);
-    this.metric = d3.select(".chart-container").append("div").attr("class", "metric").append("h3");
-    this.date = d3.select(".chart-container").append("div").attr("class", "date").append("h3").html("2012-2");
+    this.metric = d3.select(".chart-container").append("div").attr("class", "metric");
+    this.date = d3.select(".chart-container").append("div").attr("class", "date").append("h3").html("Januari 2012");
     svg.selectAll("path").data(geoData.features).enter().append("path").attr("class", "country").attr("id", function(d) {
       return d.properties.iso_a3;
     }).attr("d", d3.geo.path().projection(projection)).style("fill", function(d) {
@@ -50,12 +70,7 @@ if (Meteor.isClient) {
       var _this = this;
       d3.select(this).transition().duration(300).style('stroke', 'red');
       return metric.style("opacity", 1).html(function() {
-        var value;
-        value = "";
-        if (data[d.properties.iso_a3]) {
-          value = data[d.properties.iso_a3]["export"]["2012-" + t];
-        }
-        return d.properties.iso_a3 + " " + value;
+        return "<h3>" + d.properties.name + "</h3>" + (cash(data[d.properties.iso_a3]));
       });
     }).on("mouseout", function(d, i) {
       d3.select(this).transition().duration(300).style('stroke', "");
@@ -77,7 +92,7 @@ if (Meteor.isClient) {
       if (value) {
         t = value;
       }
-      date.html("2012-" + t);
+      date.html("" + month_names[t - 1] + " 2012");
       return svg.selectAll("path").style("fill", function(d) {
         return tradecolor(data[d.properties.iso_a3], "2012-" + t);
       });

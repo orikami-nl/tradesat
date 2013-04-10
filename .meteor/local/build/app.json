@@ -36,6 +36,7 @@
     "app/packages/past/past.js",
     "app/packages/autopublish/autopublish.js",
     "app/packages/insecure/insecure.js",
+    "app/lib/accounting.js",
     "app/lib/data.js",
     "app/lib/geo_data.js",
     "app/tradesat.coffee.js"
@@ -433,18 +434,27 @@
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/template.tradesat.js?0fbab98c3905f75783da992f9fb7cfdcfcd94cfb",
-      "size": 294,
-      "hash": "0fbab98c3905f75783da992f9fb7cfdcfcd94cfb"
+      "url": "/template.tradesat.js?cbdff19296a504d2737c381385a97e6de9e37caf",
+      "size": 310,
+      "hash": "cbdff19296a504d2737c381385a97e6de9e37caf"
+    },
+    {
+      "path": "static_cacheable/lib/accounting.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/lib/accounting.js?d60d482615e6291f70639dfc8da63f571418dc38",
+      "size": 14184,
+      "hash": "d60d482615e6291f70639dfc8da63f571418dc38"
     },
     {
       "path": "static_cacheable/lib/data.js",
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/lib/data.js?c00abb4e86afe4ff20b0ecd34f46f260ab1f0f06",
-      "size": 14814,
-      "hash": "c00abb4e86afe4ff20b0ecd34f46f260ab1f0f06"
+      "url": "/lib/data.js?a775bb29c6d52fd57058ce40dffddecb58f24ec7",
+      "size": 19307,
+      "hash": "a775bb29c6d52fd57058ce40dffddecb58f24ec7"
     },
     {
       "path": "static_cacheable/lib/geo_data.js",
@@ -460,23 +470,23 @@
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/tradesat.coffee.js?32ffa88d4cd2a914034167ed09f5a52599afe2f8",
-      "size": 3861,
-      "hash": "32ffa88d4cd2a914034167ed09f5a52599afe2f8"
+      "url": "/tradesat.coffee.js?b78b349bfe307a68f8d09db64fa0363b446e8b8f",
+      "size": 4560,
+      "hash": "b78b349bfe307a68f8d09db64fa0363b446e8b8f"
     },
     {
       "path": "static_cacheable/tradesat.less.css",
       "where": "client",
       "type": "css",
       "cacheable": true,
-      "url": "/tradesat.less.css?be029376937d6c787e898a0ef06bb0e7f17d192b",
-      "size": 694,
-      "hash": "be029376937d6c787e898a0ef06bb0e7f17d192b"
+      "url": "/tradesat.less.css?627debce5116850b9375b8937461dfaf7c3e46c2",
+      "size": 838,
+      "hash": "627debce5116850b9375b8937461dfaf7c3e46c2"
     },
     {
       "path": "app.html",
       "where": "internal",
-      "hash": "b36947cda3187dc256681b0dbb5675a462cb0def"
+      "hash": "3a33972f5254320893009f7a12a82fd8b7cda455"
     }
   ],
   "release": "0.6.1"
