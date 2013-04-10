@@ -38,7 +38,7 @@ if Meteor.isClient
       .precision(.1)
 
     @tradecolor = (xport) ->
-      ramp = d3.scale.linear().domain([0,1000000]).range(["white","blue"]);
+      ramp = d3.scale.log().domain([100,1000000]).range(["white","blue"]);
       ramp(xport)
 
     svg = d3.select(".span12")
@@ -70,6 +70,8 @@ if Meteor.isClient
       .style "fill", (d) -> 
         if data[d.properties.iso_a3]
           tradecolor(data[d.properties.iso_a3].export["2012-#{t}"])
+        else
+          "#aaaaaa"
 
       .on "mouseover", (d, i) ->
         d3.select(this).transition().duration(300).style('stroke', 'red')
@@ -100,8 +102,8 @@ if Meteor.isClient
         .style "fill", (d) -> 
           if data[d.properties.iso_a3]
             tradecolor(data[d.properties.iso_a3].export["2012-#{t}"])
-
-
+          else
+            "#aaaaaa"
 
 
 if Meteor.isServer
