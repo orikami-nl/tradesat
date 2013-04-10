@@ -19,6 +19,9 @@ if Meteor.isClient
       d3.rgb(8,48,107).toString()
     ]
 
+    t = 2
+    xport = "import"
+
     @tooltip = d3.select("body").append("div")   
       .attr("class", "tooltip")
       .style("opacity", 0);
@@ -37,9 +40,15 @@ if Meteor.isClient
       .translate([w / 3, h * 1.73])
       .precision(.1)
 
-    @tradecolor = (xport) ->
+    @tradecolor = (data, date) ->
       ramp = d3.scale.log().domain([100,1000000]).range(["white","blue"]);
-      ramp(xport)
+      if data
+        if xport == "export"
+          ramp(data.export[date])
+        else if xport == "import"
+          ramp(data.import[date])
+      else
+        "#aaaaaa"
 
     svg = d3.select(".span12")
     .append("div")
@@ -58,8 +67,6 @@ if Meteor.isClient
       .append("h3")
       .html("2012-2")
 
-    @t = 2
-
     svg.selectAll("path")
       .data(geoData.features)
       .enter().append("path") 
@@ -68,19 +75,16 @@ if Meteor.isClient
       .attr("d", d3.geo.path().projection(projection))
       # .style("fill", (d) -> colors[d.properties.mapcolor9-1])
       .style "fill", (d) -> 
-        if data[d.properties.iso_a3]
-          tradecolor(data[d.properties.iso_a3].export["2012-#{t}"])
-        else
-          "#aaaaaa"
+        tradecolor(data[d.properties.iso_a3], "2012-#{t}")
 
       .on "mouseover", (d, i) ->
         d3.select(this).transition().duration(300).style('stroke', 'red')
         metric.style("opacity", 1)
           .html () => 
-            xport = ""
+            value = ""
             if data[d.properties.iso_a3]
-              xport = data[d.properties.iso_a3].export["2012-#{t}"]
-            d.properties.iso_a3 + " " + xport
+              value = data[d.properties.iso_a3].export["2012-#{t}"]
+            d.properties.iso_a3 + " " + value
       .on "mouseout", (d, i) ->
         d3.select(this).transition().duration(300).style('stroke', "")
         metric.style("opacity", 0)
@@ -93,17 +97,26 @@ if Meteor.isClient
       .attr("value", 2)
       .on("change", () -> redraw(this.value))
 
+    xport_toggle_div = d3.select(".chart-container").append("div")
+      .attr("class", "btn-group").attr("data-toggle", "buttons-radio")
+    xport_toggle_div.append("button").attr("type", "button").attr("class", "btn active").text("Import")
+      .on "click", () ->
+        xport = "import"
+        redraw()
+    xport_toggle_div.append("button").attr("type", "button").attr("class", "btn").text("Export")
+      .on "click", () ->
+        xport = "export"
+        redraw()
+
+
     redraw = (value) =>
-      t = value
+      if value
+        t = value
+      console.log t
       date.html("2012-#{t}")
       svg.selectAll("path")
-        .attr("a", (d) -> console.log d)
-        # .style("opacity", value / 100)
         .style "fill", (d) -> 
-          if data[d.properties.iso_a3]
-            tradecolor(data[d.properties.iso_a3].export["2012-#{t}"])
-          else
-            "#aaaaaa"
+          tradecolor(data[d.properties.iso_a3], "2012-#{t}")
 
 
 if Meteor.isServer
