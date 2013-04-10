@@ -52,7 +52,7 @@ if Meteor.isClient
       .precision(.1)
 
     @tradecolor = (data, date) ->
-      ramp = d3.scale.log().domain([10,10000000]).range(["white","blue"]);
+      ramp = d3.scale.log().domain([10,10000000]).range(["white","#08306b"]);
       if data
         if xport == "export"
           ramp(data.export[date])
@@ -135,6 +135,7 @@ if Meteor.isClient
         t = value
       date.html("#{month_names[t-1]} 2012")
       svg.selectAll("path")
+        .transition(100)
         .style "fill", (d) -> 
           tradecolor(data[d.properties.iso_a3], "2012-#{t}")
 
