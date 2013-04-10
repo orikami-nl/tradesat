@@ -127,7 +127,7 @@ if Meteor.isClient
             -1
           else
             1
-        d3.select(this).transition().duration(0).style('stroke', 'red').style("stroke-width",3)
+        d3.select(this).transition().duration(0).style('stroke', '#aa0000').style("stroke-width",2)
         metric.style("opacity", 1)
           .html () => 
             "<h3>#{d.properties.name}</h3>#{cash(data[d.properties.iso_a3])}"
