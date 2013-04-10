@@ -37,11 +37,21 @@ if Meteor.isClient
       .translate([w / 3, h * 1.73])
       .precision(.1)
 
+    @tradecolor = (xport) ->
+      ramp = d3.scale.linear().domain([0,100000]).range(["red","blue"]);
+      ramp(xport)
 
-    svg = d3.select("body").append("svg")
+    svg = d3.select(".span12")
+    .append("div")
+      .attr("class","chart-container")
+    .append("svg")
     .attr("class", "chart")
     .attr("width", w)
     .attr("height", h)
+
+    @metric = d3.select(".chart-container").append("div")
+      .attr("class", "metric")
+      .append("h3")
 
     svg.selectAll("path")
       .data(geoData.features)
@@ -49,20 +59,31 @@ if Meteor.isClient
       .attr("class", "country")
       .attr("id", (d) -> d.properties.iso_a3)
       .attr("d", d3.geo.path().projection(projection))
-      .style("fill", (d) -> colors[d.properties.mapcolor9-1])
+      # .style("fill", (d) -> colors[d.properties.mapcolor9-1])
+      .style "fill", (d) -> 
+        if data[d.properties.iso_a3]
+          tradecolor(data[d.properties.iso_a3].export[2012-1])
+
       .on "mouseover", (d, i) ->
-        d3.select(this).transition().duration(300).style('fill', 'red')
-        tooltip.transition()        
-          .duration(300)      
-          .style("opacity", .9);     
-        tooltip.html("TOOLTIP")  
-          .style("left", (d3.geo.path().projection(projection).centroid(d)[0])-28 + "px")     
-          .style("top", (d3.geo.path().projection(projection).centroid(d)[1]) + "px")
+        d3.select(this).transition().duration(300).style('stroke', 'red')
+        metric.style("opacity", 1)
+          .html(d.properties.iso_a3; console.log d.properties.iso_a3)  
       .on "mouseout", (d, i) ->
-        d3.select(this).transition().duration(300).style('fill', (d) -> colors[d.properties.mapcolor9-1])
-        tooltip.transition()        
-          .duration(300)      
-          .style("opacity", 0)
+        d3.select(this).transition().duration(300).style('stroke', "")
+        metric.style("opacity", 0)
+
+
+    d3.select(".chart-container").append("input")
+      .attr("type", "range")
+      .attr("min", 0)
+      .attr("max", 100)
+      .attr("value", 25)
+      .on("change", () -> redraw(this.value))
+
+    redraw = (value) =>
+      svg.selectAll("path")
+        .attr("a", (d) -> console.log d)
+        .style("opacity", value / 100)
 
 
 
