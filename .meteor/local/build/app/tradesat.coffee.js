@@ -1,10 +1,13 @@
 
 if (Meteor.isClient) {
   Meteor.startup(function() {
-    var colors, h, projection, svg, w;
+    var colors, h, projection, redraw, svg, t, w, xport, xport_toggle_div,
+      _this = this;
     w = 960;
     h = 540;
     colors = [d3.rgb(247, 251, 255).toString(), d3.rgb(222, 235, 247).toString(), d3.rgb(198, 219, 239).toString(), d3.rgb(158, 202, 225).toString(), d3.rgb(107, 174, 214).toString(), d3.rgb(66, 146, 198).toString(), d3.rgb(33, 113, 181).toString(), d3.rgb(8, 81, 156).toString(), d3.rgb(8, 48, 107).toString()];
+    t = 2;
+    xport = "import";
     this.tooltip = d3.select("body").append("div").attr("class", "tooltip").style("opacity", 0);
     this.line = d3.svg.line().interpolate("cardinal").x(function(d) {
       return d.x;
@@ -23,21 +26,62 @@ if (Meteor.isClient) {
       };
     };
     projection = d3.geo.mercator().scale((w + 1) / 2 / Math.PI * 3.8).translate([w / 3, h * 1.73]).precision(.1);
-    svg = d3.select("body").append("svg").attr("class", "chart").attr("width", w).attr("height", h);
-    return svg.selectAll("path").data(geoData.features).enter().append("path").attr("class", "country").attr("id", function(d) {
+    this.tradecolor = function(data, date) {
+      var ramp;
+      ramp = d3.scale.log().domain([100, 1000000]).range(["white", "blue"]);
+      if (data) {
+        if (xport === "export") {
+          return ramp(data["export"][date]);
+        } else if (xport === "import") {
+          return ramp(data["import"][date]);
+        }
+      } else {
+        return "#aaaaaa";
+      }
+    };
+    svg = d3.select(".span12").append("div").attr("class", "chart-container").append("svg").attr("class", "chart").attr("width", w).attr("height", h);
+    this.metric = d3.select(".chart-container").append("div").attr("class", "metric").append("h3");
+    this.date = d3.select(".chart-container").append("div").attr("class", "date").append("h3").html("2012-2");
+    svg.selectAll("path").data(geoData.features).enter().append("path").attr("class", "country").attr("id", function(d) {
       return d.properties.iso_a3;
     }).attr("d", d3.geo.path().projection(projection)).style("fill", function(d) {
-      return colors[d.properties.mapcolor9 - 1];
+      return tradecolor(data[d.properties.iso_a3], "2012-" + t);
     }).on("mouseover", function(d, i) {
-      d3.select(this).transition().duration(300).style('fill', 'red');
-      tooltip.transition().duration(300).style("opacity", .9);
-      return tooltip.html("TOOLTIP").style("left", (d3.geo.path().projection(projection).centroid(d)[0]) - 28 + "px").style("top", (d3.geo.path().projection(projection).centroid(d)[1]) + "px");
-    }).on("mouseout", function(d, i) {
-      d3.select(this).transition().duration(300).style('fill', function(d) {
-        return colors[d.properties.mapcolor9 - 1];
+      var _this = this;
+      d3.select(this).transition().duration(300).style('stroke', 'red');
+      return metric.style("opacity", 1).html(function() {
+        var value;
+        value = "";
+        if (data[d.properties.iso_a3]) {
+          value = data[d.properties.iso_a3]["export"]["2012-" + t];
+        }
+        return d.properties.iso_a3 + " " + value;
       });
-      return tooltip.transition().duration(300).style("opacity", 0);
+    }).on("mouseout", function(d, i) {
+      d3.select(this).transition().duration(300).style('stroke', "");
+      return metric.style("opacity", 0);
     });
+    d3.select(".chart-container").append("input").attr("type", "range").attr("min", 1).attr("max", 12).attr("value", 2).on("change", function() {
+      return redraw(this.value);
+    });
+    xport_toggle_div = d3.select(".chart-container").append("div").attr("class", "btn-group").attr("data-toggle", "buttons-radio");
+    xport_toggle_div.append("button").attr("type", "button").attr("class", "btn active").text("Import").on("click", function() {
+      xport = "import";
+      return redraw();
+    });
+    xport_toggle_div.append("button").attr("type", "button").attr("class", "btn").text("Export").on("click", function() {
+      xport = "export";
+      return redraw();
+    });
+    return redraw = function(value) {
+      if (value) {
+        t = value;
+      }
+      date.html("2012-" + t);
+      return svg.selectAll("path").style("fill", function(d) {
+        return tradecolor(data[d.properties.iso_a3], "2012-" + t);
+      });
+    };
   });
 }
 
