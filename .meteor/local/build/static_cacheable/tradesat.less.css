@@ -20,7 +20,7 @@ div.tooltip {
   border-radius: 8px;
   pointer-events: none;
 }
-input {
+#slider {
   position: absolute;
   bottom: 20px;
   right: 20px;
@@ -40,7 +40,7 @@ input {
 .date {
   position: absolute;
   right: 20px;
-  bottom: 40px;
+  bottom: 30px;
 }
 .chart-container {
   position: relative;
@@ -54,4 +54,10 @@ input {
 .container,
 .span12 {
   width: 940px !important;
+}
+.health-span {
+  margin-top: 50px;
+}
+.health-image {
+  margin: 20px 0 20px 0;
 }
