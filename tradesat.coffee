@@ -3,7 +3,7 @@ if Meteor.isClient
 
   Meteor.startup ->
 
-    w = 960
+    w = 940
     h = 540
 
     colors = 
@@ -145,16 +145,19 @@ if Meteor.isClient
         redraw(ui.value)
 
     xport_toggle_div = d3.select(".chart-container").append("div")
-      .attr("class", "btn-group").attr("data-toggle", "buttons-radio")
+      .attr("class", "btn-group")
     xport_toggle_div.append("button").attr("type", "button").attr("class", "btn active").text("Import")
       .on "click", () ->
         xport = "import"
         redraw()
+        $("button").removeClass("active")
+        $(this).addClass("active")
     xport_toggle_div.append("button").attr("type", "button").attr("class", "btn").text("Export")
       .on "click", () ->
         xport = "export"
         redraw()
-
+        $("button").removeClass("active")
+        $(this).addClass("active")
 
     redraw = (value) =>
       if value
