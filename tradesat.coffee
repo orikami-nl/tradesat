@@ -135,13 +135,14 @@ if Meteor.isClient
         d3.select(this).transition().duration(200).style('stroke', "").style("stroke-width",1)
         metric.style("opacity", 0)
 
+    d3.select(".chart-container").append("div").attr("id","slider")
 
-    d3.select(".chart-container").append("input")
-      .attr("type", "range")
-      .attr("min", 0)
-      .attr("max", 15)
-      .attr("value", 0)
-      .on("change", () -> redraw(this.value))
+    $("#slider").slider
+      min: 0
+      max: 15
+      value: 0
+      slide: (e,ui) ->
+        redraw(ui.value)
 
     xport_toggle_div = d3.select(".chart-container").append("div")
       .attr("class", "btn-group").attr("data-toggle", "buttons-radio")
