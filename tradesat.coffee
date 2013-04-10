@@ -171,7 +171,7 @@ if Meteor.isClient
       .attr("x",15).attr("y",250)
       .attr("width",20).attr("height",200)
 
-    legend_ticks = ["€0","€50.000","€500.000","€5 miljoen","€50 miljoen","€500 miljoen","5+ miljard"]
+    legend_ticks = ["€0","€50.000","€500.000","€5 miljoen","€50 miljoen","€500 miljoen","€5+ miljard"]
 
     d3.select(".chart-container").selectAll(".legend-label")
       .data(legend_ticks)
