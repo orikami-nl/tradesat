@@ -94,7 +94,7 @@ if Meteor.isClient
         else
           "2012-#{t-5}"
 
-    svg = d3.select(".span12")
+    svg = d3.select(".chart-span")
     .append("div")
       .attr("class","chart-container")
     .append("svg")
