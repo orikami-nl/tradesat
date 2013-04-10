@@ -19,6 +19,9 @@ if Meteor.isClient
       d3.rgb(8,48,107).toString()
     ]
 
+    t = 2
+    xport = "import"
+
     @tooltip = d3.select("body").append("div")   
       .attr("class", "tooltip")
       .style("opacity", 0);
@@ -37,11 +40,32 @@ if Meteor.isClient
       .translate([w / 3, h * 1.73])
       .precision(.1)
 
+    @tradecolor = (data, date) ->
+      ramp = d3.scale.log().domain([100,1000000]).range(["white","blue"]);
+      if data
+        if xport == "export"
+          ramp(data.export[date])
+        else if xport == "import"
+          ramp(data.import[date])
+      else
+        "#aaaaaa"
 
-    svg = d3.select("body").append("svg")
+    svg = d3.select(".span12")
+    .append("div")
+      .attr("class","chart-container")
+    .append("svg")
     .attr("class", "chart")
     .attr("width", w)
     .attr("height", h)
+
+    @metric = d3.select(".chart-container").append("div")
+      .attr("class", "metric")
+      .append("h3")
+
+    @date = d3.select(".chart-container").append("div")
+      .attr("class", "date")
+      .append("h3")
+      .html("2012-2")
 
     svg.selectAll("path")
       .data(geoData.features)
@@ -49,22 +73,49 @@ if Meteor.isClient
       .attr("class", "country")
       .attr("id", (d) -> d.properties.iso_a3)
       .attr("d", d3.geo.path().projection(projection))
-      .style("fill", (d) -> colors[d.properties.mapcolor9-1])
+      # .style("fill", (d) -> colors[d.properties.mapcolor9-1])
+      .style "fill", (d) -> 
+        tradecolor(data[d.properties.iso_a3], "2012-#{t}")
+
       .on "mouseover", (d, i) ->
-        d3.select(this).transition().duration(300).style('fill', 'red')
-        tooltip.transition()        
-          .duration(300)      
-          .style("opacity", .9);     
-        tooltip.html("TOOLTIP")  
-          .style("left", (d3.geo.path().projection(projection).centroid(d)[0])-28 + "px")     
-          .style("top", (d3.geo.path().projection(projection).centroid(d)[1]) + "px")
+        d3.select(this).transition().duration(300).style('stroke', 'red')
+        metric.style("opacity", 1)
+          .html () => 
+            value = ""
+            if data[d.properties.iso_a3]
+              value = data[d.properties.iso_a3].export["2012-#{t}"]
+            d.properties.iso_a3 + " " + value
       .on "mouseout", (d, i) ->
-        d3.select(this).transition().duration(300).style('fill', (d) -> colors[d.properties.mapcolor9-1])
-        tooltip.transition()        
-          .duration(300)      
-          .style("opacity", 0)
+        d3.select(this).transition().duration(300).style('stroke', "")
+        metric.style("opacity", 0)
 
 
+    d3.select(".chart-container").append("input")
+      .attr("type", "range")
+      .attr("min", 1)
+      .attr("max", 12)
+      .attr("value", 2)
+      .on("change", () -> redraw(this.value))
+
+    xport_toggle_div = d3.select(".chart-container").append("div")
+      .attr("class", "btn-group").attr("data-toggle", "buttons-radio")
+    xport_toggle_div.append("button").attr("type", "button").attr("class", "btn active").text("Import")
+      .on "click", () ->
+        xport = "import"
+        redraw()
+    xport_toggle_div.append("button").attr("type", "button").attr("class", "btn").text("Export")
+      .on "click", () ->
+        xport = "export"
+        redraw()
+
+
+    redraw = (value) =>
+      if value
+        t = value
+      date.html("2012-#{t}")
+      svg.selectAll("path")
+        .style "fill", (d) -> 
+          tradecolor(data[d.properties.iso_a3], "2012-#{t}")
 
 
 if Meteor.isServer

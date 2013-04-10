@@ -433,18 +433,18 @@
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/template.tradesat.js?ef8264aff5d337742a550a48bebcb48c8e92e808",
-      "size": 149,
-      "hash": "ef8264aff5d337742a550a48bebcb48c8e92e808"
+      "url": "/template.tradesat.js?0fbab98c3905f75783da992f9fb7cfdcfcd94cfb",
+      "size": 294,
+      "hash": "0fbab98c3905f75783da992f9fb7cfdcfcd94cfb"
     },
     {
       "path": "static_cacheable/lib/data.js",
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/lib/data.js?973cf39ca566d83375b4f065081633cfb84021d8",
-      "size": 3654,
-      "hash": "973cf39ca566d83375b4f065081633cfb84021d8"
+      "url": "/lib/data.js?c00abb4e86afe4ff20b0ecd34f46f260ab1f0f06",
+      "size": 14814,
+      "hash": "c00abb4e86afe4ff20b0ecd34f46f260ab1f0f06"
     },
     {
       "path": "static_cacheable/lib/geo_data.js",
@@ -460,23 +460,23 @@
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/tradesat.coffee.js?828d6a8fa2efdbbff872a785289226f39321e772",
-      "size": 2225,
-      "hash": "828d6a8fa2efdbbff872a785289226f39321e772"
+      "url": "/tradesat.coffee.js?32ffa88d4cd2a914034167ed09f5a52599afe2f8",
+      "size": 3861,
+      "hash": "32ffa88d4cd2a914034167ed09f5a52599afe2f8"
     },
     {
       "path": "static_cacheable/tradesat.less.css",
       "where": "client",
       "type": "css",
       "cacheable": true,
-      "url": "/tradesat.less.css?8f076e10e446e60761ed8ff40e84b387809b46c6",
-      "size": 271,
-      "hash": "8f076e10e446e60761ed8ff40e84b387809b46c6"
+      "url": "/tradesat.less.css?be029376937d6c787e898a0ef06bb0e7f17d192b",
+      "size": 694,
+      "hash": "be029376937d6c787e898a0ef06bb0e7f17d192b"
     },
     {
       "path": "app.html",
       "where": "internal",
-      "hash": "81c72070e77f2e7a9732de056cc24257eb5b4998"
+      "hash": "b36947cda3187dc256681b0dbb5675a462cb0def"
     }
   ],
   "release": "0.6.1"
