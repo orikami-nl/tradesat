@@ -43,6 +43,15 @@
   ],
   "manifest": [
     {
+      "path": "static/Gezondheid_leeftstijl.jpg",
+      "where": "client",
+      "type": "static",
+      "cacheable": false,
+      "url": "/Gezondheid_leeftstijl.jpg",
+      "size": 244687,
+      "hash": "d7e22267196b06c82534f60d27c3541ed9cae623"
+    },
+    {
       "path": "static_cacheable/packages/underscore/underscore.js",
       "where": "client",
       "type": "js",
@@ -434,9 +443,9 @@
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/template.tradesat.js?cbdff19296a504d2737c381385a97e6de9e37caf",
-      "size": 310,
-      "hash": "cbdff19296a504d2737c381385a97e6de9e37caf"
+      "url": "/template.tradesat.js?9f228196ea4efb49cdbad17e9a02e2cb65ee97a6",
+      "size": 2750,
+      "hash": "9f228196ea4efb49cdbad17e9a02e2cb65ee97a6"
     },
     {
       "path": "static_cacheable/lib/accounting.js",
@@ -452,41 +461,50 @@
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/lib/data.js?a775bb29c6d52fd57058ce40dffddecb58f24ec7",
-      "size": 19307,
-      "hash": "a775bb29c6d52fd57058ce40dffddecb58f24ec7"
+      "url": "/lib/data.js?329e536eaecbbce5e3ba18e60a22fedcb81c9dc7",
+      "size": 43328,
+      "hash": "329e536eaecbbce5e3ba18e60a22fedcb81c9dc7"
     },
     {
       "path": "static_cacheable/lib/geo_data.js",
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/lib/geo_data.js?ec87d49b910401de812807a131526291dfafb282",
+      "url": "/lib/geo_data.js?71555cef2814876077d1e01eebd9e507e5ee28bf",
       "size": 588986,
-      "hash": "ec87d49b910401de812807a131526291dfafb282"
+      "hash": "71555cef2814876077d1e01eebd9e507e5ee28bf"
     },
     {
       "path": "static_cacheable/tradesat.coffee.js",
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/tradesat.coffee.js?b78b349bfe307a68f8d09db64fa0363b446e8b8f",
-      "size": 4560,
-      "hash": "b78b349bfe307a68f8d09db64fa0363b446e8b8f"
+      "url": "/tradesat.coffee.js?1487a8577157a71f735630cfd4b6a9a2ac9ef812",
+      "size": 5522,
+      "hash": "1487a8577157a71f735630cfd4b6a9a2ac9ef812"
+    },
+    {
+      "path": "static_cacheable/lib/jquery-ui.css",
+      "where": "client",
+      "type": "css",
+      "cacheable": true,
+      "url": "/lib/jquery-ui.css?c65ebeaebe70982d3e4a5664d30b651a5c118db4",
+      "size": 32383,
+      "hash": "c65ebeaebe70982d3e4a5664d30b651a5c118db4"
     },
     {
       "path": "static_cacheable/tradesat.less.css",
       "where": "client",
       "type": "css",
       "cacheable": true,
-      "url": "/tradesat.less.css?627debce5116850b9375b8937461dfaf7c3e46c2",
-      "size": 838,
-      "hash": "627debce5116850b9375b8937461dfaf7c3e46c2"
+      "url": "/tradesat.less.css?733a58e2293a09efc9bd970ca56ea07df5dc2515",
+      "size": 920,
+      "hash": "733a58e2293a09efc9bd970ca56ea07df5dc2515"
     },
     {
       "path": "app.html",
       "where": "internal",
-      "hash": "3a33972f5254320893009f7a12a82fd8b7cda455"
+      "hash": "337c010f3b7e48d7b64c909c35cd9190fb778041"
     }
   ],
   "release": "0.6.1"
