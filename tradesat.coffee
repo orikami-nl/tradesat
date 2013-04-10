@@ -122,12 +122,17 @@ if Meteor.isClient
         tradecolor(data[d.properties.iso_a3], month(t))
 
       .on "mouseover", (d, i) ->
-        d3.select(this).transition().duration(300).style('stroke', 'red')
+        svg.selectAll("path").sort (a,b) ->
+          if a.properties.iso_a3 != d.properties.iso_a3
+            -1
+          else
+            1
+        d3.select(this).transition().duration(0).style('stroke', 'red').style("stroke-width",3)
         metric.style("opacity", 1)
           .html () => 
             "<h3>#{d.properties.name}</h3>#{cash(data[d.properties.iso_a3])}"
       .on "mouseout", (d, i) ->
-        d3.select(this).transition().duration(300).style('stroke', "")
+        d3.select(this).transition().duration(200).style('stroke', "").style("stroke-width",1)
         metric.style("opacity", 0)
 
 
