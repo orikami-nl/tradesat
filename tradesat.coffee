@@ -38,7 +38,7 @@ if Meteor.isClient
       .precision(.1)
 
     @tradecolor = (xport) ->
-      ramp = d3.scale.linear().domain([0,100000]).range(["red","blue"]);
+      ramp = d3.scale.linear().domain([0,1000000]).range(["white","blue"]);
       ramp(xport)
 
     svg = d3.select(".span12")
@@ -53,6 +53,13 @@ if Meteor.isClient
       .attr("class", "metric")
       .append("h3")
 
+    @date = d3.select(".chart-container").append("div")
+      .attr("class", "date")
+      .append("h3")
+      .html("2012-2")
+
+    @t = 2
+
     svg.selectAll("path")
       .data(geoData.features)
       .enter().append("path") 
@@ -62,12 +69,16 @@ if Meteor.isClient
       # .style("fill", (d) -> colors[d.properties.mapcolor9-1])
       .style "fill", (d) -> 
         if data[d.properties.iso_a3]
-          tradecolor(data[d.properties.iso_a3].export[2012-1])
+          tradecolor(data[d.properties.iso_a3].export["2012-#{t}"])
 
       .on "mouseover", (d, i) ->
         d3.select(this).transition().duration(300).style('stroke', 'red')
         metric.style("opacity", 1)
-          .html(d.properties.iso_a3; console.log d.properties.iso_a3)  
+          .html () => 
+            xport = ""
+            if data[d.properties.iso_a3]
+              xport = data[d.properties.iso_a3].export["2012-#{t}"]
+            d.properties.iso_a3 + " " + xport
       .on "mouseout", (d, i) ->
         d3.select(this).transition().duration(300).style('stroke', "")
         metric.style("opacity", 0)
@@ -75,15 +86,20 @@ if Meteor.isClient
 
     d3.select(".chart-container").append("input")
       .attr("type", "range")
-      .attr("min", 0)
-      .attr("max", 100)
-      .attr("value", 25)
+      .attr("min", 1)
+      .attr("max", 12)
+      .attr("value", 2)
       .on("change", () -> redraw(this.value))
 
     redraw = (value) =>
+      t = value
+      date.html("2012-#{t}")
       svg.selectAll("path")
         .attr("a", (d) -> console.log d)
-        .style("opacity", value / 100)
+        # .style("opacity", value / 100)
+        .style "fill", (d) -> 
+          if data[d.properties.iso_a3]
+            tradecolor(data[d.properties.iso_a3].export["2012-#{t}"])
 
 
 

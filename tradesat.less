@@ -1,6 +1,12 @@
-svg .country{
-  fill: white;
-  stroke: gray;
+svg {
+  display: block;
+  margin: 0 auto;
+  border: 1px solid #DEDEDE;
+  overflow: hidden;
+  .country{
+    fill: white;
+    stroke: gray;
+  }
 }
 
 div.tooltip {
@@ -14,4 +20,27 @@ div.tooltip {
   border: 0px;      
   border-radius: 8px;     
   pointer-events: none;         
+}
+
+input {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 200px;
+}
+
+.metric{
+  position: absolute;
+  left: 20px;
+  top: 100px;
+}
+
+.date{
+  position: absolute;
+  left: 20px;
+  top: 10px;
+}
+
+.chart-container{
+  position: relative;
 }
