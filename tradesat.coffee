@@ -112,7 +112,6 @@ if Meteor.isClient
     redraw = (value) =>
       if value
         t = value
-      console.log t
       date.html("2012-#{t}")
       svg.selectAll("path")
         .style "fill", (d) -> 
