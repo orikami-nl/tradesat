@@ -18,7 +18,18 @@ if Meteor.isClient
       d3.rgb(8,81,156).toString(),
       d3.rgb(8,48,107).toString()
     ]
+    
+    month_names = ["Januari","Februari","Maart","April","Mei","Juni","Juli","Augustus","September","Oktober","November","December"]
 
+    accounting.settings = _.defaults
+      currency:
+        symbol : "€"
+        format: "%s%v"
+        decimal : ","
+        thousand: "."
+        precision : 0 
+    ,accounting.settings
+      
     t = 2
     xport = "import"
 
@@ -41,7 +52,7 @@ if Meteor.isClient
       .precision(.1)
 
     @tradecolor = (data, date) ->
-      ramp = d3.scale.log().domain([100,1000000]).range(["white","blue"]);
+      ramp = d3.scale.log().domain([10,10000000]).range(["white","blue"]);
       if data
         if xport == "export"
           ramp(data.export[date])
@@ -49,6 +60,19 @@ if Meteor.isClient
           ramp(data.import[date])
       else
         "#aaaaaa"
+
+    @cash = (data) ->
+      if data
+        export_cash = data.export["2012-#{t}"] * 1000
+        import_cash = data.import["2012-#{t}"] * 1000
+        "<h5>
+          Export: #{accounting.formatMoney(export_cash)}
+        </h5>
+        <h5>
+          Import: #{accounting.formatMoney(import_cash)}
+        </h5>"
+      else
+        ""
 
     svg = d3.select(".span12")
     .append("div")
@@ -60,12 +84,12 @@ if Meteor.isClient
 
     @metric = d3.select(".chart-container").append("div")
       .attr("class", "metric")
-      .append("h3")
 
     @date = d3.select(".chart-container").append("div")
       .attr("class", "date")
       .append("h3")
-      .html("2012-2")
+      .html("Januari 2012")
+
 
     svg.selectAll("path")
       .data(geoData.features)
@@ -81,10 +105,7 @@ if Meteor.isClient
         d3.select(this).transition().duration(300).style('stroke', 'red')
         metric.style("opacity", 1)
           .html () => 
-            value = ""
-            if data[d.properties.iso_a3]
-              value = data[d.properties.iso_a3].export["2012-#{t}"]
-            d.properties.iso_a3 + " " + value
+            "<h3>#{d.properties.name}</h3>#{cash(data[d.properties.iso_a3])}"
       .on "mouseout", (d, i) ->
         d3.select(this).transition().duration(300).style('stroke', "")
         metric.style("opacity", 0)
@@ -112,7 +133,7 @@ if Meteor.isClient
     redraw = (value) =>
       if value
         t = value
-      date.html("2012-#{t}")
+      date.html("#{month_names[t-1]} 2012")
       svg.selectAll("path")
         .style "fill", (d) -> 
           tradecolor(data[d.properties.iso_a3], "2012-#{t}")
