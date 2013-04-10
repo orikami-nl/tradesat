@@ -81,6 +81,19 @@ if Meteor.isClient
       else
         "2012-#{t-5}"
 
+    month_invalid_date_fix = (t) ->
+      t = parseInt(t)
+      if t < 6
+        if t+7 < 10
+          "2011-0#{t+7}"
+        else
+          "2011-#{t+7}"
+      else
+        if t-5 < 10
+          "2012-0#{t-5}"
+        else
+          "2012-#{t-5}"
+
     svg = d3.select(".span12")
     .append("div")
       .attr("class","chart-container")
@@ -141,7 +154,7 @@ if Meteor.isClient
       if value
         t = value
       t = parseInt(t)
-      date.html("#{month_names[(new Date(month(t))).getMonth()]} #{(new Date(month(t))).getFullYear()}")
+      date.html("#{month_names[(new Date(month_invalid_date_fix(t))).getMonth()]} #{(new Date(month_invalid_date_fix(t))).getFullYear()}")
       svg.selectAll("path")
         .transition(100)
         .style "fill", (d) -> 
