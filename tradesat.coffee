@@ -30,7 +30,7 @@ if Meteor.isClient
         precision : 0 
     ,accounting.settings
       
-    t = 2
+    t = 0
     xport = "import"
 
     @tooltip = d3.select("body").append("div")   
@@ -52,7 +52,7 @@ if Meteor.isClient
       .precision(.1)
 
     @tradecolor = (data, date) ->
-      ramp = d3.scale.log().domain([10,10000000]).range(["white","#08306b"]);
+      ramp = d3.scale.log().domain([10,5000000]).range(["white","#08306b"]);
       if data
         if xport == "export"
           ramp(data.export[date])
@@ -63,8 +63,8 @@ if Meteor.isClient
 
     @cash = (data) ->
       if data
-        export_cash = data.export["2012-#{t}"] * 1000
-        import_cash = data.import["2012-#{t}"] * 1000
+        export_cash = data.export[month(t)] * 1000
+        import_cash = data.import[month(t)] * 1000
         "<h5>
           Export: #{accounting.formatMoney(export_cash)}
         </h5>
@@ -73,6 +73,13 @@ if Meteor.isClient
         </h5>"
       else
         ""
+
+    month = (t) ->
+      t = parseInt(t)
+      if t < 6
+        "2011-#{t+7}"
+      else
+        "2012-#{t-5}"
 
     svg = d3.select(".span12")
     .append("div")
@@ -88,7 +95,7 @@ if Meteor.isClient
     @date = d3.select(".chart-container").append("div")
       .attr("class", "date")
       .append("h3")
-      .html("Januari 2012")
+      .html("Juli 2011")
 
 
     svg.selectAll("path")
@@ -99,7 +106,7 @@ if Meteor.isClient
       .attr("d", d3.geo.path().projection(projection))
       # .style("fill", (d) -> colors[d.properties.mapcolor9-1])
       .style "fill", (d) -> 
-        tradecolor(data[d.properties.iso_a3], "2012-#{t}")
+        tradecolor(data[d.properties.iso_a3], month(t))
 
       .on "mouseover", (d, i) ->
         d3.select(this).transition().duration(300).style('stroke', 'red')
@@ -113,9 +120,9 @@ if Meteor.isClient
 
     d3.select(".chart-container").append("input")
       .attr("type", "range")
-      .attr("min", 1)
-      .attr("max", 12)
-      .attr("value", 2)
+      .attr("min", 0)
+      .attr("max", 15)
+      .attr("value", 0)
       .on("change", () -> redraw(this.value))
 
     xport_toggle_div = d3.select(".chart-container").append("div")
@@ -133,11 +140,12 @@ if Meteor.isClient
     redraw = (value) =>
       if value
         t = value
-      date.html("#{month_names[t-1]} 2012")
+      t = parseInt(t)
+      date.html("#{month_names[(new Date(month(t))).getMonth()]} #{(new Date(month(t))).getFullYear()}")
       svg.selectAll("path")
         .transition(100)
         .style "fill", (d) -> 
-          tradecolor(data[d.properties.iso_a3], "2012-#{t}")
+          tradecolor(data[d.properties.iso_a3], month(t))
 
 
 if Meteor.isServer
